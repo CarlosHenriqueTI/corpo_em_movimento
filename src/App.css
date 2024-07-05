@@ -1,0 +1,368 @@
+/* Estilo global */
+* {
+  font-family: "Mulish", sans-serif; /* Mantém a fonte consistente */
+  margin: auto;
+  padding: auto;
+  box-sizing: border-box; /* Aplica box-sizing a todos os elementos e pseudo-elementos */
+  line-height: 1.6; /* Melhora a legibilidade do texto */
+  z-index: 1;
+}
+
+/* Cabeçalho */
+header {
+  padding: 20px 0;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  gap: 20px;
+  text-align: center;
+}
+
+.logo img {
+  height: 80px; /* Ajuste conforme necessário */
+}
+
+.logo h1 {
+  color: #007bff; /* Cor azul padrão para links */
+  font-size: 20px; /* Ajuste conforme necessário */
+  margin-left: 10px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #343a40; /* Cor escura para melhor leitura */
+  margin: 0 10px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.menu a:hover {
+  color: #007bff; /* Cor azul ao passar o mouse */
+}
+
+.socialmidia a img {
+  height: 30px; /* Ajuste conforme necessário */
+  margin: 0 15px;
+  transition: transform 0.3s ease;
+}
+
+.socialmidia a:hover img {
+  transform: scale(1.1); /* Efeito de zoom leve ao passar o mouse */
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo, .menu, .socialmidia {
+    margin: 10px 0;
+  }
+
+  .menu a {
+    display: block;
+    margin: 5px 0;
+  }
+}
+
+/* Seção Sobre */
+.sobre {
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 50px 0;
+  margin-right: 70px;
+}
+
+.sobre__img img {
+  width: 70%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.sobre__texto {
+  max-width: 600px;
+}
+
+.sobre__texto h1 {
+  color: #007bff;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.sobre__texto p {
+  color: #343a40;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .sobre {
+    flex-direction: column;
+    margin-right: 10px;
+  }
+
+  .sobre__img {
+    max-width: 90%;
+  }
+}
+
+button:active {
+  transform: translateY(1px); /* Efeito de "pressionar" ao clicar */
+}
+
+/* Seção Resultados */
+.resultados {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 50px 0;
+}
+
+.card {
+  position: relative;
+  width: 400px;
+  height: 350px;
+  background: linear-gradient(-45deg, #0fff53 0%, #29dcf8 100% );
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.card svg {
+  width: 48px;
+  fill: #333;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.card:hover {
+  transform: rotate(-5deg) scale(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.card:hover .card__content {
+  transform: translate(-50%, -50%) rotate(0deg);
+  opacity: 1;
+}
+
+.card__title {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+  font-weight: 700;
+}
+
+.card__description {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: #777;
+  line-height: 1.4;
+}
+
+.card:hover svg {
+  scale: 0;
+  transform: rotate(-45deg);
+}
+
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .resultados {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+}
+
+/* Seção Consulta */
+.consulta {
+  background-color: #f0f8ff; /* Cor de fundo suave */
+  padding: 40px; /* Espaçamento interno */
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  max-width: 800px; /* Largura máxima */
+  margin: 20px auto; /* Centraliza e adiciona margem vertical */
+}
+
+.consulta h1 {
+  color: #007bff; /* Cor do título */
+  margin-bottom: 20px; /* Espaçamento abaixo do título */
+}
+
+.consulta__link p {
+  color: #666; /* Cor do texto */
+  line-height: 1.6; /* Espaçamento entre linhas */
+}
+
+.consulta__botao {
+  margin-top: 20px; /* Espaçamento acima do botão */
+  text-align: center; /* Centraliza o botão */
+}
+
+.consulta__botao button {
+  background-color: #007bff; /* Cor de fundo do botão */
+  color: #fff; /* Cor do texto do botão */
+  border: none; /* Remove a borda */
+  padding: 10px 20px; /* Espaçamento interno */
+  border-radius: 5px; /* Bordas arredondadas */
+  cursor: pointer; /* Muda o cursor para indicar clicabilidade */
+  font-size: 16px; /* Tamanho do texto */
+  transition: background-color 0.3s; /* Transição suave da cor de fundo */
+}
+
+.consulta__botao button:hover {
+  background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+}
+
+.consulta__botao a {
+  color: #fff; /* Cor do texto */
+  text-decoration: none; /* Remove o sublinhado */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .consulta {
+    padding: 20px; /* Reduz o espaçamento interno */
+  }
+
+  .consulta__botao button {
+    width: 100%; /* Faz o botão ocupar toda a largura */
+  }
+}
+
+.contato {
+  display: flex;
+  padding: 40px; /* Espaçamento interno */
+  margin: 10px auto; /* Centraliza e adiciona margem vertical */
+}
+
+.contato__container {
+  display: flex;
+  flex-direction: column; /* Organiza os itens em coluna */
+  gap: 20px; /* Espaçamento entre os itens */
+}
+
+.contato__titulo {
+  color: #333; /* Cor do título */
+  margin-bottom: 20px; /* Espaçamento abaixo do título */
+}
+
+.contato__contato {
+  display: flex;
+  align-items: center; /* Alinha os itens verticalmente */
+  gap: 10px; /* Espaçamento entre ícone e texto */
+}
+
+.contato__icon, svg {
+  width: 32px; /* Largura dos ícones */
+  height: 32px; /* Altura dos ícones */
+}
+
+.contato__paragrafo, .contato__dias {
+  color: #666; /* Cor do texto */
+  margin: 0; /* Remove margens padrão */
+}
+
+.contato__paragrafo a {
+  color: #007bff; /* Cor do link */
+  text-decoration: none; /* Remove o sublinhado */
+}
+
+.contato__dias {
+  font-weight: bold; /* Torna o texto em negrito */
+  color: #333; /* Cor do texto para dias */
+}
+
+/* Estilização específica para o mapa */
+.contato__mapa {
+  width: 600px; /* Largura total dentro do container */
+  height: 450px; /* Altura fixa */
+  border: 0; /* Remove a borda */
+  margin-top: 20px; /* Espaçamento acima do mapa */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .contato {
+    flex-direction: column; /* Mantém a organização em coluna */
+  }
+  .contato__mapa {
+    width: 100%; /* Faz o mapa ocupar toda a largura */
+    height: 300px; /* Reduz a altura do mapa */
+  }
+}
+
+/* Rodapé */
+footer {
+  text-align: center;
+  padding: 40px 20px; /* Aumenta o padding para mais espaço */
+  font-size: 16px; /* Tamanho de fonte para melhor legibilidade */
+  line-height: 1.5; /* Espaçamento de linha para textos mais longos */
+}
+
+/* Conteúdo Principal */
+main {
+  padding: 40px 20px; /* Aumenta o padding vertical para mais espaço */
+  text-align: center;
+  margin: 0 auto; /* Centraliza o main se necessário */
+  position: relative;
+}
+
+.whats {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 2;
+}
