@@ -1,6 +1,14 @@
 import "./App.css";
+import { useState } from 'react';
 
 function App() {
+// Passo 1: Definir o estado inicial
+const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+// Passo 2: Manipular o clique
+const handleClick = () => {
+  setIsMenuOpen(!isMenuOpen); // Alterna o estado do menu
+};
   return (
     <>
       <header>
@@ -12,6 +20,12 @@ function App() {
               <br />
               Centro de Fisioterapia
             </h1>
+            <input type="checkbox" id="checkbox" onClick={handleClick}/>
+    <label htmlFor="checkbox" className="toggle">
+        <div className="bars" id="bar1"></div>
+        <div className="bars" id="bar2"></div>
+        <div className="bars" id="bar3"></div>
+    </label>
           </div>
           <div className="menu">
             <a href="#">Início</a>
@@ -21,6 +35,17 @@ function App() {
             <a href="#">Agendamento</a>
             <a href="#">Depoimentos</a>
           </div>
+          {isMenuOpen && (
+            <div className="menu__mobile">
+              {/* Links da navegação aqui */}
+              <a href="#">Início</a>
+            <a href="#">Sobre</a>
+            <a href="#">Especialidades</a>
+            <a href="#">Contato</a>
+            <a href="#">Agendamento</a>
+            <a href="#">Depoimentos</a>
+            </div>
+          )}
           <div className="socialmidia">
             <a href="#">
               <img src="\src\assets\face.png" alt="facebook" />
@@ -72,9 +97,7 @@ function App() {
         </div>
         <section className="resultados">
           <div className="card">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path>
-            </svg>
+           
             <div className="card__content">
               <h3 className="card__title">Fisioterapia Cardiovascular</h3>
               <p className="card__description">
@@ -92,12 +115,9 @@ function App() {
             </div>
           </div>
           <div className="card">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path>
-            </svg>
+            
             <div className="card__content">
               <h3 className="card__title">Fisioterapia Dermatofuncional</h3>
-              <br />
               <p className="card__description">
                 A fisioterapia dermatofuncional é uma especialidade que se
                 concentra na prevenção e tratamento de disfunções estéticas e
@@ -114,9 +134,7 @@ function App() {
             </div>
           </div>
           <div className="card">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path>
-            </svg>
+            
             <div className="card__content">
               <h3 className="card__title">Fisioterapia neurofuncional</h3>
               <p className="card__description">
@@ -207,20 +225,14 @@ function App() {
                 (53) 999121265
               </a>
             </div>
-
             <h2 className="contato__titulo">Horário de funcionamento</h2>
-
             <p className="contato__paragrafo">
               Possuímos horários personalizados para suprir a alta demanda de
               pacientes.
             </p>
-
             <p className="contato__dias">Segunda a Sexta</p>
-
             <p className="contato__paragrafo">08:00 às 19:00</p>
-
             <p className="contato__dias">Sábado e Domingo</p>
-
             <p className="contato__paragrafo">10:00 às 14:00</p>
           </div>
           <div className="mapa">
@@ -237,6 +249,7 @@ function App() {
           </div>
         </section>
       </main>
+      <hr />
       <footer>
         <p>Corpo em Movimento &copy; 2024</p>
       </footer>

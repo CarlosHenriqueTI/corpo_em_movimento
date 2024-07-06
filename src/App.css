@@ -9,15 +9,77 @@
 }
 
 /* Cabeçalho */
-header {
-  padding: 20px 0;
-}
-
 nav {
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  z-index: 3;
+  background-color: rgba(255, 255, 255, 0.133);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(13.2px);
+}
+
+#checkbox {
+  display: none;
+}
+
+.toggle {
+  display: none;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition-duration: .5s;
+}
+
+.bars {
+  width: 100%;
+  height: 4px;
+  background-color: #19bbce;
+  border-radius: 4px;
+}
+
+#bar2 {
+  transition-duration: .8s;
+}
+
+#bar1,#bar3 {
+  width: 100%;
+}
+
+#checkbox:checked + .toggle .bars {
+  position: absolute;
+  transition-duration: .5s;
+}
+
+#checkbox:checked + .toggle #bar2 {
+  transform: scaleX(0);
+  transition-duration: .5s;
+}
+
+#checkbox:checked + .toggle #bar1 {
+  width: 100%;
+  transform: rotate(45deg);
+  transition-duration: .5s;
+}
+
+#checkbox:checked + .toggle #bar3 {
+  width: 100%;
+  transform: rotate(-45deg);
+  transition-duration: .5s;
+}
+
+#checkbox:checked + .toggle {
+  transition-duration: .5s;
+  transform: rotate(180deg);
 }
 
 .logo {
@@ -26,19 +88,23 @@ nav {
   text-align: center;
 }
 
+h1 {
+  color: #19bbce;
+}
+
 .logo img {
   height: 80px; /* Ajuste conforme necessário */
 }
 
 .logo h1 {
-  color: #007bff; /* Cor azul padrão para links */
+  color: #19bbce; /* Cor azul padrão para links */
   font-size: 20px; /* Ajuste conforme necessário */
   margin-left: 10px;
 }
 
 .menu a {
   text-decoration: none;
-  color: #343a40; /* Cor escura para melhor leitura */
+  color: #19bbce; /* Cor escura para melhor leitura */
   margin: 0 10px;
   font-weight: 500;
   transition: color 0.3s ease;
@@ -64,14 +130,54 @@ nav {
     align-items: center;
   }
 
-  .logo, .menu, .socialmidia {
-    margin: 10px 0;
-  }
-
-  .menu a {
-    display: block;
+  .logo {
     margin: 5px 0;
   }
+
+  .socialmidia {
+    display: none;
+  }
+
+
+  .logo img {
+    height: 50px;
+  }
+
+  .toggle{
+    display: flex;
+    height: 30px;
+    width: 27px;
+  }
+
+.menu {
+  display: none;
+    height: 100vh;
+}
+
+.menu__mobile{
+  top: 74px;
+  right: 0;
+  z-index: 2;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(244, 244, 244, 0.8);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(13.2px);
+}
+
+.menu__mobile a {
+  color: #19bbce;
+  margin: 0;
+  text-decoration: none;
+  font-size: 20px;
+}
 }
 
 /* Seção Sobre */
@@ -81,8 +187,9 @@ nav {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  padding: 50px 0;
   margin-right: 70px;
+  margin-bottom: 20px;
+  padding-top: 150px;
 }
 
 .sobre__img img {
@@ -96,7 +203,7 @@ nav {
 }
 
 .sobre__texto h1 {
-  color: #007bff;
+  color: #19bbce;
   font-size: 28px;
   margin-bottom: 20px;
 }
@@ -108,7 +215,7 @@ nav {
 }
 
 button {
-  background-color: #007bff;
+  background-color: #19bbce;
   color: #ffffff;
   border: none;
   padding: 10px 20px;
@@ -123,7 +230,7 @@ button a {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #1596a4;
 }
 
 @media (max-width: 768px) {
@@ -146,50 +253,19 @@ button:active {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  padding: 50px 0;
+  padding: 30px 0;
 }
 
 .card {
   position: relative;
   width: 400px;
-  height: 350px;
-  background: linear-gradient(-45deg, #0fff53 0%, #29dcf8 100% );
-  border-radius: 10px;
+  height: 400px;
+  border-radius: 30px;
+  background: #dfeff3;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 50px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 26px -18px inset;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-}
-
-.card svg {
-  width: 48px;
-  fill: #333;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-}
-
-.card:hover {
-  transform: rotate(-5deg) scale(1.1);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.card__content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-45deg);
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: #fff;
-  opacity: 0;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-}
-
-.card:hover .card__content {
-  transform: translate(-50%, -50%) rotate(0deg);
-  opacity: 1;
 }
 
 .card__title {
@@ -228,16 +304,17 @@ button:active {
 
 /* Seção Consulta */
 .consulta {
-  background-color: #f0f8ff; /* Cor de fundo suave */
+  background-color: #dfeff3; /* Cor de fundo suave */
   padding: 40px; /* Espaçamento interno */
   border-radius: 8px; /* Bordas arredondadas */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
   max-width: 800px; /* Largura máxima */
-  margin: 20px auto; /* Centraliza e adiciona margem vertical */
+  margin: 40px auto; /* Centraliza e adiciona margem vertical */
+  
 }
 
 .consulta h1 {
-  color: #007bff; /* Cor do título */
+  color: #19bbce; /* Cor do título */
   margin-bottom: 20px; /* Espaçamento abaixo do título */
 }
 
@@ -252,7 +329,7 @@ button:active {
 }
 
 .consulta__botao button {
-  background-color: #007bff; /* Cor de fundo do botão */
+  background-color: #19bbce; /* Cor de fundo do botão */
   color: #fff; /* Cor do texto do botão */
   border: none; /* Remove a borda */
   padding: 10px 20px; /* Espaçamento interno */
@@ -263,7 +340,7 @@ button:active {
 }
 
 .consulta__botao button:hover {
-  background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+  background-color: #1596a4; /* Cor de fundo ao passar o mouse */
 }
 
 .consulta__botao a {
@@ -285,7 +362,7 @@ button:active {
 .contato {
   display: flex;
   padding: 40px; /* Espaçamento interno */
-  margin: 10px auto; /* Centraliza e adiciona margem vertical */
+  background-color: #dfeff3;
 }
 
 .contato__container {
@@ -303,6 +380,10 @@ button:active {
   display: flex;
   align-items: center; /* Alinha os itens verticalmente */
   gap: 10px; /* Espaçamento entre ícone e texto */
+}
+
+.contato__paragrafo {
+  text-decoration: none;
 }
 
 .contato__icon, svg {
@@ -350,11 +431,11 @@ footer {
   padding: 40px 20px; /* Aumenta o padding para mais espaço */
   font-size: 16px; /* Tamanho de fonte para melhor legibilidade */
   line-height: 1.5; /* Espaçamento de linha para textos mais longos */
+  background-color: #dfeff3;
 }
 
 /* Conteúdo Principal */
 main {
-  padding: 40px 20px; /* Aumenta o padding vertical para mais espaço */
   text-align: center;
   margin: 0 auto; /* Centraliza o main se necessário */
   position: relative;
