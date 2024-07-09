@@ -1,49 +1,35 @@
-import { useState, useMemo } from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import './Calendar.css';
+import React from 'react';
+import '../pages/Agendamentos.css';
 
-const MyCalendar = ({ schedules }) => {
-  const [date, setDate] = useState(new Date());
-
-  // Passo 2: Uso de useMemo para pré-processar os schedules
-  const schedulesByDate = useMemo(() => {
-    const map = {};
-    schedules.forEach(schedule => {
-      const dateStr = new Date(schedule.date).toISOString().split('T')[0]; // Passo 3: Formato 'YYYY-MM-DD'
-      if (!map[dateStr]) {
-        map[dateStr] = [];
-      }
-      map[dateStr].push(schedule);
-    });
-    return map;
-  }, [schedules]); // Dependência: schedules
+const Calendar = ({ selectedDate, horarios, onDateClick, onMarkHorario, onShowApproved }) => {
+  const diasComAgendamento = new Set(horarios.map(horario => {
+    const horarioDate = new Date(horario.data);
+    return `${horarioDate.getDate()}-${horarioDate.getMonth()}-${horarioDate.getFullYear()}`;
+  }));
 
   return (
     <div className="calendar">
       <h2>Calendário</h2>
-      <Calendar
-        onChange={setDate}
-        value={date}
-        tileContent={({ date }) => {
-          const daySchedules = schedulesByDate[date.toISOString().split('T')[0]]; // Acesso direto pelo mapa
-          return daySchedules ? (
-            <ul>
-              {daySchedules.map(schedule => (
-                <li key={schedule.id}>
-                  {schedule.time} - {schedule.description}
-                </li>
-              ))}
-            </ul>
-          ) : null;
-        }}
-      />
+      <div className="days">
+        {[...Array(31).keys()].map(day => {
+          const date = new Date(2024, 6, day + 1);
+          const key = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
+          const hasAgendamento = diasComAgendamento.has(key);
+          return (
+            <div
+              key={day + 1}
+              className={`day ${selectedDate && selectedDate.getDate() === day + 1 ? 'selected' : ''} ${hasAgendamento ? 'scheduled' : ''}`}
+              onClick={() => onDateClick(date)}
+            >
+              {day + 1}
+            </div>
+          );
+        })}
+      </div>
+      <button className="mark-button" onClick={onMarkHorario}>Marcar Horário</button>
+      <button className="approved-button" onClick={onShowApproved}>Ver Horários Aprovados</button>
     </div>
   );
 };
-MyCalendar.propTypes = {
-  schedules: PropTypes.array.isRequired, // Add prop validation for 'schedules'
-};
 
-export default MyCalendar;
+export default Calendar;

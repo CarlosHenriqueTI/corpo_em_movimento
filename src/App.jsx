@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function App() {
 // Passo 1: Definir o estado inicial
@@ -32,8 +33,8 @@ const handleClick = () => {
             <a href="#">Sobre</a>
             <a href="#">Especialidades</a>
             <a href="#">Contato</a>
-            <a href="#">Agendamento</a>
-            <a href="#">Depoimentos</a>
+            <Link to="/agendamento">Agendamento</Link>
+            <Link to="/depoimentos">Depoimentos</Link>
           </div>
           {isMenuOpen && (
             <div className="menu__mobile">
@@ -42,8 +43,8 @@ const handleClick = () => {
             <a href="#">Sobre</a>
             <a href="#">Especialidades</a>
             <a href="#">Contato</a>
-            <a href="#">Agendamento</a>
-            <a href="#">Depoimentos</a>
+            <Link to="/agendamento">Agendamento</Link>
+            <Link to="/depoimentos">Depoimentos</Link>
             </div>
           )}
           <div className="socialmidia">
