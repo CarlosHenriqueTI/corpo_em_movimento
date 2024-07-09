@@ -5,23 +5,16 @@ import '../pages/Agendamentos.css';
 const ViewModal = ({
   isOpen,
   closeModal,
-  horarios = [],
+  horariosDoDia = [],
   selectedDate,
   onApprove,
   onEdit,
   onDelete,
 }) => {
-  const filteredHorarios = horarios
-    ? horarios.filter((horario) => {
-        if (!selectedDate) return false;
-        const horarioDate = new Date(horario.data);
-        return (
-          horarioDate.getDate() === selectedDate.getDate() &&
-          horarioDate.getMonth() === selectedDate.getMonth() &&
-          horarioDate.getFullYear() === selectedDate.getFullYear()
-        );
-      })
-    : [];
+
+  const handleApproveClick = (index) => {
+    onApprove(index); // Chama a função para aprovar o horário
+  };
 
   return (
     <Modal
@@ -32,20 +25,14 @@ const ViewModal = ({
       overlayClassName="modal-overlay"
     >
       <div className="modal-content">
-        <span className="close" onClick={closeModal}>
-          &times;
-        </span>
-        <h2>
-          Horários Aprovados
-          {selectedDate && selectedDate.toLocaleDateString()}
-        </h2>
+        <span className="close" onClick={closeModal}>&times;</span>
+        <h2>Horários Agendados - {selectedDate && selectedDate.toLocaleDateString()}</h2>
         <ul>
-          {filteredHorarios.map((horario, index) => (
+          {horariosDoDia.map((horario, index) => (
             <li key={index}>
-              <strong>{horario.nome}</strong> - {horario.horario} -{' '}
-              {horario.servico}
+              <strong>{horario.nome}</strong> - {horario.horario} - {horario.servico}
               {!horario.aprovado ? (
-                <button onClick={() => onApprove(index)}>Aprovar</button>
+                <button onClick={() => handleApproveClick(index)}>Aprovar</button>
               ) : (
                 <span className="approved">Aprovado</span>
               )}
