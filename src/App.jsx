@@ -10,6 +10,7 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
 const handleClick = () => {
   setIsMenuOpen(!isMenuOpen); // Alterna o estado do menu
 };
+
   return (
     <>
       <header>
@@ -29,20 +30,18 @@ const handleClick = () => {
     </label>
           </div>
           <div className="menu">
-            <a href="#">Início</a>
-            <a href="#">Sobre</a>
-            <a href="#">Especialidades</a>
-            <a href="#">Contato</a>
+          <Link to="/">Início</Link>
+            <a href="#resultados">Especialidades</a>
+            <a href="#contato">Contato</a>
             <Link to="/agendamento">Agendamento</Link>
             <Link to="/depoimentos">Depoimentos</Link>
           </div>
           {isMenuOpen && (
             <div className="menu__mobile">
               {/* Links da navegação aqui */}
-              <a href="#">Início</a>
-            <a href="#">Sobre</a>
-            <a href="#">Especialidades</a>
-            <a href="#">Contato</a>
+              <Link to="/">Início</Link>
+            <a href="#resultados">Especialidades</a>
+            <a href="#contato">Contato</a>
             <Link to="/agendamento">Agendamento</Link>
             <Link to="/depoimentos">Depoimentos</Link>
             </div>
@@ -96,7 +95,7 @@ const handleClick = () => {
         <div>
           <h1>Especialidades</h1>
         </div>
-        <section className="resultados">
+        <section id="resultados">
           <div className="card">
            
             <div className="card__content">
@@ -168,14 +167,13 @@ const handleClick = () => {
             </p>
             <div className="consulta__botao">
               <button>
-                <a href="#">
-                  Verifique a disponibilidades de horários e agende sua consulta
-                </a>
+              <Link to="/agendamento">Verifique a disponibilidades de horários e agende sua consulta</Link>
               </button>
             </div>
           </div>
         </section>
-        <section className="contato">
+        
+        <section id="contato">
           <div className="contato__container">
             <h1 className="contato__titulo">Entre em contato conosco</h1>
 

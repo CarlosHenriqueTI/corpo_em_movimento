@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import '../pages/Agendamentos.css';
 
@@ -35,6 +35,12 @@ const ViewApprovedModal = ({
       </div>
     </Modal>
   );
+};
+ViewApprovedModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  approvedHorarios: PropTypes.array,
+  onUnapprove: PropTypes.func.isRequired,
 };
 
 export default ViewApprovedModal;

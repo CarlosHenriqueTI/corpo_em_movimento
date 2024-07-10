@@ -249,7 +249,7 @@ button:active {
 }
 
 /* Seção Resultados */
-.resultados {
+#resultados {
   display: flex;
   justify-content: space-between;
   gap: 20px;
@@ -291,7 +291,7 @@ button:active {
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .resultados {
+  #resultados {
     flex-direction: column;
     align-items: center;
   }
@@ -359,7 +359,7 @@ button:active {
   }
 }
 
-.contato {
+#contato {
   display: flex;
   padding: 40px; /* Espaçamento interno */
   background-color: #dfeff3;
@@ -416,7 +416,7 @@ button:active {
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .contato {
+  #contato {
     flex-direction: column; /* Mantém a organização em coluna */
   }
   .contato__mapa {

@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import './Agendamentos.css';
 import ViewModal from '../components/ViewModal';
 import ViewApprovedModal from '../components/ViewApprovedModal';
+import { Link } from 'react-router-dom';
 
 const Agendamentos = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+// Passo 2: Manipular o clique
+const handleClick = () => {
+  setIsMenuOpen(!isMenuOpen); // Alterna o estado do menu
+};
   const [selectedDate, setSelectedDate] = useState(null);
   const [horarios, setHorarios] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -148,70 +155,117 @@ const Agendamentos = () => {
   };
 
   return (
-    <div className="app">
-      <h1>Sistema de Gerenciamento de Horários</h1>
-      <div className="calendar">
-        <h2>Calendário</h2>
-        <div className="days">
-          {[...Array(31).keys()].map(day => {
-            const date = new Date(2024, 6, day + 1);
-            const key = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
-            const hasAgendamento = diasComAgendamento.has(key);
-            return (
-              <div
-                key={day + 1}
-                className={`day ${selectedDate && selectedDate.getDate() === day + 1 ? 'selected' : ''} ${hasAgendamento ? 'scheduled' : ''}`}
-                onClick={() => handleDateClick(date)}
-              >
-                {day + 1}
+    <div>
+      <header>
+          <nav>
+            <div className="logo">
+              <img src="\src\assets\logo.png" alt="logo" />
+              <h1>
+                Corpo em Movimento
+                <br />
+                Centro de Fisioterapia
+              </h1>
+              <input type="checkbox" id="checkbox" onClick={handleClick}/>
+      <label htmlFor="checkbox" className="toggle">
+          <div className="bars" id="bar1"></div>
+          <div className="bars" id="bar2"></div>
+          <div className="bars" id="bar3"></div>
+      </label>
+            </div>
+            <div className="menu">
+            <Link to="/">Início</Link>
+              <a href="#">Sobre</a>
+              <a href="#">Especialidades</a>
+              <a href="#">Contato</a>
+              <Link to="/agendamento">Agendamento</Link>
+              <Link to="/depoimentos">Depoimentos</Link>
+            </div>
+            {isMenuOpen && (
+              <div className="menu__mobile">
+                {/* Links da navegação aqui */}
+                <Link to="/">Início</Link>
+              <a href="#">Sobre</a>
+              <a href="#">Especialidades</a>
+              <a href="#">Contato</a>
+              <Link to="/agendamento">Agendamento</Link>
+              <Link to="/depoimentos">Depoimentos</Link>
               </div>
-            );
-          })}
+            )}
+            <div className="socialmidia">
+              <a href="#">
+                <img src="\src\assets\face.png" alt="facebook" />
+              </a>
+              <a href="#">
+                <img src="\src\assets\insta.png" alt="facebook" />
+              </a>
+              <a href="#">
+                <img src="\src\assets\tiktok.png" alt="facebook" />
+              </a>
+            </div>
+          </nav>
+        </header>
+      <div className="app">
+        <h1>Agendamento de Horários</h1>
+        <div className="calendar">
+          <h2>Calendário</h2>
+          <div className="days">
+            {[...Array(31).keys()].map(day => {
+              const date = new Date(2024, 6, day + 1);
+              const key = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
+              const hasAgendamento = diasComAgendamento.has(key);
+              return (
+                <div
+                  key={day + 1}
+                  className={`day ${selectedDate && selectedDate.getDate() === day + 1 ? 'selected' : ''} ${hasAgendamento ? 'scheduled' : ''}`}
+                  onClick={() => handleDateClick(date)}
+                >
+                  {day + 1}
+                </div>
+              );
+            })}
+          </div>
+          <button className="mark-button" onClick={handleMarkHorario}>Marcar Horário</button>
+          <button className="approved-button" onClick={handleShowApproved}>Ver Horários Aprovados</button>
         </div>
-        <button className="mark-button" onClick={handleMarkHorario}>Marcar Horário</button>
-        <button className="approved-button" onClick={handleShowApproved}>Ver Horários Aprovados</button>
+        <ViewModal
+          isOpen={modalOpen && modalTipo === 'ver'}
+          closeModal={closeModal}
+          horariosDoDia={horariosDoDia}
+          selectedDate={selectedDate}
+          onApprove={handleApprove}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
+        <ViewApprovedModal
+          isOpen={modalOpen && modalTipo === 'aprovados'}
+          closeModal={closeModal}
+          approvedHorarios={approvedHorarios}
+          onUnapprove={handleUnapprove}
+        />
+        <Modal
+          isOpen={modalOpen && modalTipo === 'marcar'}
+          onRequestClose={closeModal}
+          contentLabel="Adicionar Horário"
+          className="modal"
+          overlayClassName="modal-overlay"
+        >
+          <div className="modal-content">
+            <span className="close" onClick={closeModal}>&times;</span>
+            <h2>Adicionar Horário</h2>
+            <form onSubmit={e => { e.preventDefault(); handleSubmit(); }}>
+              <label>Nome:</label>
+              <input type="text" value={nome} onChange={e => setNome(e.target.value)} required />
+              <label>Data:</label>
+              <input type="date" value={selectedDate ? selectedDate.toISOString().substr(0, 10) : ''} onChange={e => setSelectedDate(new Date(e.target.value))} required />
+              <label>Horário:</label>
+              <input type="time" value={horario} onChange={e => setHorario(e.target.value)} required />
+              <label>Descreva o motivo da consulta:</label>
+              <input type="text" value={servico} onChange={e => setServico(e.target.value)} required />
+              <button type="submit">{editMode ? 'Salvar Alterações' : 'Adicionar Horário'}</button>
+            </form>
+          </div>
+        </Modal>
       </div>
-
-      <ViewModal
-        isOpen={modalOpen && modalTipo === 'ver'}
-        closeModal={closeModal}
-        horariosDoDia={horariosDoDia}
-        selectedDate={selectedDate}
-        onApprove={handleApprove}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      />
-
-      <ViewApprovedModal
-        isOpen={modalOpen && modalTipo === 'aprovados'}
-        closeModal={closeModal}
-        approvedHorarios={approvedHorarios}
-        onUnapprove={handleUnapprove}
-      />
-
-      <Modal
-        isOpen={modalOpen && modalTipo === 'marcar'}
-        onRequestClose={closeModal}
-        contentLabel="Adicionar Horário"
-        className="modal"
-        overlayClassName="modal-overlay"
-      >
-        <div className="modal-content">
-          <span className="close" onClick={closeModal}>&times;</span>
-          <h2>Adicionar Horário</h2>
-          <form onSubmit={e => { e.preventDefault(); handleSubmit(); }}>
-            <label>Nome:</label>
-            <input type="text" value={nome} onChange={e => setNome(e.target.value)} required />
-            <label>Data:</label>
-            <input type="date" value={selectedDate ? selectedDate.toISOString().substr(0, 10) : ''} onChange={e => setSelectedDate(new Date(e.target.value))} required />
-            <label>Horário:</label>
-            <input type="time" value={horario} onChange={e => setHorario(e.target.value)} required />
-            <label>Descreva o motivo da consulta:</label>
-            <input type="text" value={servico} onChange={e => setServico(e.target.value)} required />
-            <button type="submit">{editMode ? 'Salvar Alterações' : 'Adicionar Horário'}</button>
-          </form>
-        </div>
-      </Modal>
     </div>
   );
 };

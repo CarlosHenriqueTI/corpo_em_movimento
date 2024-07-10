@@ -1,142 +1,64 @@
-/* Agendamentos.css */
-
-/* Estilo para o corpo da página */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
 .app {
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para o cabeçalho */
 .app h1 {
+  margin-top: 70px;
   text-align: center;
-  margin-bottom: 20px;
-  color: #333;
 }
 
-/* Estilo para o calendário */
 .calendar {
-  margin-bottom: 20px;
-}
-
-.calendar h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: #555;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .days {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* Ajuste para 7 dias da semana */
   gap: 10px;
+  margin-top: 10px;
+  background-color: #dfeff3;
 }
 
 .day {
-  width: 40px;
-  height: 40px;
+  padding: 20px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 50%;
+  height: 50px;
+  background-color: transparent;
   cursor: pointer;
-  font-size: 0.9rem;
   transition: background-color 0.3s ease;
 }
 
-.day.selected {
-  background-color: #00c2a7;
-  color: #fff;
-}
-
-.day.scheduled {
-  background-color: #87CEEB; /* Cor para os dias com horários agendados */
-  color: #fff;
+.day:hover, .day.selected, .day.scheduled {
+  background-color: #a0e0a0;
 }
 
 .mark-button, .approved-button {
-  background-color: #00c2a7;
-  color: #fff;
-  border: none;
+  margin-top: 20px;
   padding: 10px 20px;
-  font-size: 1rem;
   cursor: pointer;
-  border-radius: 4px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
   transition: background-color 0.3s ease;
 }
 
 .mark-button:hover, .approved-button:hover {
-  background-color: #009688;
+  background-color: #45a049;
 }
 
-/* Estilo para os horários agendados */
-.horarios {
-  margin-top: 20px;
-}
-
-.horarios h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: #555;
-}
-
-.horarios ul {
-  list-style: none;
-  padding: 0;
-}
-
-.horarios li {
-  background-color: #f9f9f9;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.horarios li button {
-  background-color: #f44336;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-.horarios li button:hover {
-  background-color: #d32f2f;
-}
-
-/* Estilo para o modal */
 .modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  width: 80%;
-  max-width: 600px;
+  background-color: white;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 
 .modal-overlay {
@@ -149,41 +71,71 @@ body {
 }
 
 .modal-content {
-  position: relative;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
 }
 
 .close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  align-self: flex-end;
   cursor: pointer;
-  font-size: 1.5rem;
-  color: #888;
+  font-size: 24px;
 }
 
-/* Outros estilos */
-input[type="text"],
-input[type="date"],
-input[type="time"] {
-  width: calc(100% - 20px);
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 10px;
+}
+
+input[type="text"], input[type="date"], input[type="time"] {
   padding: 8px;
-  margin-bottom: 10px;
+  margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 0.9rem;
 }
 
 button[type="submit"] {
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
+  margin-top: 20px;
   padding: 10px 20px;
-  font-size: 1rem;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
   cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover {
-  background-color: #45a049;
+@media (max-width: 1024px) {
+  .days {
+    grid-template-columns: repeat(5, 1fr); /* Ajusta para 5 dias em telas um pouco maiores */
+  }
+}
+
+@media (max-width: 768px) {
+  .days {
+    grid-template-columns: repeat(3, 1fr); /* Ajusta para 3 dias em tablets */
+  }
+
+  .day {
+    height: 40px; /* Ajusta a altura para dispositivos menores */
+  }
+}
+
+@media (max-width: 480px) {
+  .days {
+    grid-template-columns: repeat(5, 1fr); /* Ajusta para 2 dias em smartphones */
+  }
+
+  .app, .calendar, .modal-content {
+    padding: 10px; /* Reduz o padding para economizar espaço */
+  }
+
+  .modal-content h2 {
+    font-size: 20px; /* Reduz o tamanho do título */}
+
+  .mark-button, .approved-button, button[type="submit"] {
+    padding: 8px 16px; /* Reduz o tamanho dos botões */
+  }
 }

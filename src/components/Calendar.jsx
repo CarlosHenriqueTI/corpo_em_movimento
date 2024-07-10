@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import './Agendamentos.css';
 import ViewModal from '../components/ViewModal';
@@ -17,7 +17,7 @@ const Agendamentos = () => {
   const [editMode, setEditMode] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
   const [approvedHorarios, setApprovedHorarios] = useState([]);
-  const [diasComAgendamento, setDiasComAgendamento] = useState(new Set());
+  const [, setDiasComAgendamento] = useState(new Set());
 
   useEffect(() => {
     const storedHorarios = JSON.parse(localStorage.getItem('horarios')) || [];

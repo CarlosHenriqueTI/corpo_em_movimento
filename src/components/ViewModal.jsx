@@ -1,5 +1,5 @@
-import React from 'react';
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
 import '../pages/Agendamentos.css';
 
 const ViewModal = ({
@@ -44,6 +44,15 @@ const ViewModal = ({
       </div>
     </Modal>
   );
+};
+ViewModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  horariosDoDia: PropTypes.array,
+  selectedDate: PropTypes.instanceOf(Date),
+  onApprove: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default ViewModal;
